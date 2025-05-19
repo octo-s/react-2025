@@ -6,16 +6,16 @@ const reactRoot = createRoot(document.getElementById('root')!)
 reactRoot.render(
     <>
         <h1>Список ресторанов</h1>
-        {restaurants.map((restaurant) => (
+        {restaurants.map(({id, name, menu, reviews}) => (
             <>
-                <h2 key={restaurant.id}>{restaurant.name}</h2>
+                <h2 key={id}>{name}</h2>
                 <h3>Меню</h3>
                 <ul>
-                    {restaurant.menu.map((menuItem) => (
-                        <li key={menuItem.id}>
-                            <h4>{menuItem.name} - {menuItem.price} eur</h4>
+                    {menu.map(({id: menuId, name, price, ingredients}) => (
+                        <li key={menuId}>
+                            <h4>{name} - {price} eur</h4>
                             <ul>
-                                {menuItem.ingredients.map((ingredient) => (
+                                {ingredients.map((ingredient) => (
                                     <li key={ingredient}>{ingredient}</li>
                                 ))}
                             </ul>
@@ -24,10 +24,10 @@ reactRoot.render(
                 </ul>
                 <h3>Отзывы</h3>
                 <ul>
-                    {restaurant.reviews.map((review) => (
-                        <li key={review.id}>
-                            <h4>{review.user} - {review.rating} stars</h4>
-                            <>{review.text}</>
+                    {reviews.map(({id: reviewId, user, rating, text}) => (
+                        <li key={reviewId}>
+                            <h4>{user} - {rating} stars</h4>
+                            <>{text}</>
                         </li>
                     ))}
                 </ul>
