@@ -1,6 +1,6 @@
 export type Ingredient = string;
 
-export type MenuItem = {
+export type Dish = {
   id: string;
   name: string;
   price: number;
@@ -17,7 +17,6 @@ export type Review = {
 export type Restaurant = {
   id: string;
   name: string;
-  menu: MenuItem[];
+  menu: Dish[];
   reviews: Review[];
 };
-
