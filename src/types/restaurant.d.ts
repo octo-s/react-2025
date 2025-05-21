@@ -20,4 +20,3 @@ export type Restaurant = {
   menu: Dish[];
   reviews: Review[];
 };
-

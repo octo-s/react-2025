@@ -1,29 +1,39 @@
-import type {Dish as DishType} from "../../types/restaurant";
-import {useCounter} from "../hooks/useCounter.ts";
+import React from "react";
+import type { Dish as DishType } from "../../types/restaurant";
+import { useCounter } from "../hooks/useCounter.ts";
+import { CounterButtons } from "../CounterButtons";
 
 const MAX_DISH_COUNT = 5;
 const MIN_DISH_COUNT = 0;
 
 type DishProps = {
-    dish: DishType;
-}
-
-export const Dish = ({dish}:DishProps) => {
-    const {name, price, ingredients} = dish;
-    const {count, onDecrement, onIncrement} = useCounter(MAX_DISH_COUNT, MIN_DISH_COUNT);
-
-    return (
-        <>
-            <h4>{name} - {price} eur</h4>
-            <ul>
-                {ingredients.map((ingredient) => (
-                    <li key={ingredient}>{ingredient}</li>
-                ))}
-            </ul>
-            <button onClick={onDecrement} disabled={count === MIN_DISH_COUNT}>-</button>
-            {count}
-            <button onClick={onIncrement} disabled={count === MAX_DISH_COUNT}>+</button>
-        </>
-    );
+  dish: DishType;
 };
 
+export const Dish: React.FC<DishProps> = ({ dish }) => {
+  const { name, price, ingredients } = dish;
+  const { count, onDecrement, onIncrement } = useCounter(
+    MAX_DISH_COUNT,
+    MIN_DISH_COUNT,
+  );
+
+  return (
+    <>
+      <h4>
+        {name} - {price} eur
+      </h4>
+      <ul>
+        {ingredients.map((ingredient) => (
+          <li key={ingredient}>{ingredient}</li>
+        ))}
+      </ul>
+      <CounterButtons
+        value={count}
+        onDecrement={onDecrement}
+        onIncrement={onIncrement}
+        minCount={MIN_DISH_COUNT}
+        maxCount={MAX_DISH_COUNT}
+      />
+    </>
+  );
+};

@@ -1,14 +1,15 @@
-import {Layout} from "../Layout";
-import {RestaurantTabs} from "../RestaurantTabs";
+import React from "react";
+import { Layout } from "../Layout";
+import { RestaurantTabs } from "../RestaurantTabs";
 
 type AppProps = {
-    title: string;
-}
+  title: string;
+};
 
-export const App= ({title}:AppProps) => {
-    return (
-        <Layout title={title}>
-            <RestaurantTabs />
-        </Layout>
-    );
+export const App: React.FC<AppProps> = ({ title }) => {
+  return (
+    <Layout title={title}>
+      <RestaurantTabs />
+    </Layout>
+  );
 };
