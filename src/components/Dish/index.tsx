@@ -23,9 +23,10 @@ export const Dish: React.FC<DishProps> = ({ dish }) => {
         {name} - {price} eur
       </h4>
       <ul>
-        {ingredients.map((ingredient) => (
-          <li key={ingredient}>{ingredient}</li>
-        ))}
+        {ingredients.length &&
+          ingredients.map((ingredient) => (
+            <li key={ingredient}>{ingredient}</li>
+          ))}
       </ul>
       <CounterButtons
         value={count}
