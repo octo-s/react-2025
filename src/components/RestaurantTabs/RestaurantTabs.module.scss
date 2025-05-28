@@ -1,0 +1,27 @@
+@use '../../styles/variables' as *;
+
+.tabs {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+
+  button {
+    padding: 0.5rem 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-accent;
+    border-radius: $radius;
+    cursor: pointer;
+    font-weight: 500;
+    color: $color-primary;
+    font-family: $font-base;
+    transition: background-color $transition;
+
+    &:hover {
+      background-color: $color-light;
+    }
+
+    &.active {
+      background-color: $color-accent;
+      color: $color-white;
+    }
+  }
+}

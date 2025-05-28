@@ -1,4 +1,6 @@
 import React from "react";
+import styles from "./CounterButtons.module.scss";
+import { Button } from "../Button/Button";
 
 type CounterButtonsProps = {
   maxCount: number;
@@ -16,14 +18,24 @@ export const CounterButtons: React.FC<CounterButtonsProps> = ({
   value,
 }) => {
   return (
-    <>
-      <button type="button" onClick={onDecrement} disabled={value === minCount}>
+    <div className={styles.counter}>
+      <Button
+        position="left"
+        type="button"
+        onClick={onDecrement}
+        disabled={value === minCount}
+      >
         -
-      </button>
-      {/*{value}*/}
-      <button type="button" onClick={onIncrement} disabled={value === maxCount}>
+      </Button>
+      <span className={styles.text}>{value}</span>
+      <Button
+        position="right"
+        type="button"
+        onClick={onIncrement}
+        disabled={value === maxCount}
+      >
         +
-      </button>
-    </>
+      </Button>
+    </div>
   );
 };

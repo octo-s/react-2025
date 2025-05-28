@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+
+.review {
+  padding: 1rem;
+  background-color: lighten($color-background, 2%);
+  border-left: 4px solid $color-accent;
+  margin-bottom: 1rem;
+  border-radius: $radius;
+
+  h4 {
+    font-weight: 600;
+    color: $color-text;
+    font-family: $font-heading;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    color: $color-text;
+  }
+}
