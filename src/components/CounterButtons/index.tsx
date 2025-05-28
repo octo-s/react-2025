@@ -17,11 +17,11 @@ export const CounterButtons: React.FC<CounterButtonsProps> = ({
 }) => {
   return (
     <>
-      <button onClick={onDecrement} disabled={value === minCount}>
+      <button type="button" onClick={onDecrement} disabled={value === minCount}>
         -
       </button>
-      {value}
-      <button onClick={onIncrement} disabled={value === maxCount}>
+      {/*{value}*/}
+      <button type="button" onClick={onIncrement} disabled={value === maxCount}>
         +
       </button>
     </>
