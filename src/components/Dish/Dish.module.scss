@@ -1,0 +1,22 @@
+@use '../../styles/variables' as *;
+
+.dish {
+  padding: 1rem;
+  border-bottom: 1px solid $color-border;
+
+  h4 {
+    font-family: $font-heading;
+    font-size: 1.2rem;
+    color: $color-text;
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  li {
+    color: $color-text;
+  }
+}

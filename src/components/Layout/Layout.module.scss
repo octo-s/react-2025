@@ -1,0 +1,25 @@
+@use '../../styles/variables' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: $font-base;
+  background-color: $color-light;
+  color: $color-dark;
+}
+
+.header {
+  background-color: $color-primary-dark;
+  padding: 1rem 2rem;
+  color: $color-white;
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.875rem;
+  background-color: $color-primary-dark;
+  color: $color-white;
+}

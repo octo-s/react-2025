@@ -2,6 +2,7 @@ import React from "react";
 import type { Dish as DishType } from "../../types/restaurant";
 import { useCounter } from "../hooks/useCounter.ts";
 import { CounterButtons } from "../CounterButtons";
+import styles from "./Dish.module.scss";
 
 const MAX_DISH_COUNT = 5;
 const MIN_DISH_COUNT = 0;
@@ -18,7 +19,7 @@ export const Dish: React.FC<DishProps> = ({ dish }) => {
   );
 
   return (
-    <>
+    <div className={styles.dish}>
       <h4>
         {name} - {price} eur
       </h4>
@@ -35,6 +36,6 @@ export const Dish: React.FC<DishProps> = ({ dish }) => {
         minCount={MIN_DISH_COUNT}
         maxCount={MAX_DISH_COUNT}
       />
-    </>
+    </div>
   );
 };
