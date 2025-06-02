@@ -1,7 +1,7 @@
 @use '../../styles/variables' as *;
 
 .restaurant {
-  background-color: $color-background;
+  background-color: var(--color-background);
   padding: 2rem;
   border-radius: $radius + 4px;
   margin-top: 1rem;
@@ -9,18 +9,18 @@
   h2 {
     font-family: $font-heading;
     font-size: 2rem;
-    color: $color-primary;
+    color: var(--color-primary);
     margin-bottom: 1rem;
   }
 
   h3 {
     font-size: 1.5rem;
     margin: 1.5rem 0 1rem;
-    color: $color-primary-dark;
+    color: var(--color-primary)-dark;
   }
 
   .empty {
-    color: $color-muted;
+    color: var(--color-muted);
     font-style: italic;
   }
 }

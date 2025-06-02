@@ -3,19 +3,19 @@ import classNames from "classnames";
 import styles from "./Button.module.scss";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline";
+  appearance?: "primary" | "secondary" | "outline";
   position?: "left" | "right" | "top" | "bottom";
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  variant = "primary",
+  appearance = "primary",
   position = "left",
   className,
   ...props
 }) => {
   const buttonClass = classNames(
     styles.button,
-    styles[variant],
+    styles[appearance],
     styles[position],
     className,
   );
