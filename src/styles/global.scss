@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables' as *;
 
 /* --- CSS RESET  --- */
 *,
@@ -17,8 +17,8 @@ body {
 /* --- Глобальные стили --- */
 body {
   font-family: $font-base;
-  background-color: $color-light;
-  color: $color-dark;
+  background-color: var(--color-light);
+  color: var(--color-dark);
   line-height: 1.5;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;

@@ -1,8 +1,8 @@
 import React from "react";
 import type { Dish as DishType } from "../../types/restaurant";
-import { useCounter } from "../hooks/useCounter.ts";
 import { CounterButtons } from "../CounterButtons";
 import styles from "./Dish.module.scss";
+import { useCounter } from "../../hooks/useCounter";
 
 const MAX_DISH_COUNT = 5;
 const MIN_DISH_COUNT = 0;
