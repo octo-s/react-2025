@@ -4,12 +4,13 @@ import { UserContext, type UserContextProps } from "./UserContext";
 type UserProviderProps = {
   children?: React.ReactNode;
 };
+
+const mockUser = {
+  name: "UserName",
+};
+
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<UserContextProps["user"]>(null);
-
-  const mockUser = {
-    name: "UserName",
-  };
 
   const toggleUser = () => {
     setUser((prev) => (prev ? null : mockUser));

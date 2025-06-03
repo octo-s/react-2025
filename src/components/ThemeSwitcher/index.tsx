@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import SunIcon from "../../icons/sun.svg?react";
 import MoonIcon from "../../icons/moon.svg?react";
 import { Button } from "../Button/Button";
-import { useTheme } from "../../providers/ThemeProvider/useTheme";
-import { NORMAL_THEME } from "../../providers/ThemeProvider/ThemeContext";
+import {
+  NORMAL_THEME,
+  ThemeContext,
+} from "../../providers/ThemeProvider/ThemeContext";
+
 export const ThemeSwitcher: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <Button

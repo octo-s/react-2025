@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Title } from "../Title";
 import styles from "./Layout.module.scss";
 import { ProgressBar } from "../ProgressBar/ProgressBar";
 import classNames from "classnames";
 import { ThemeSwitcher } from "../ThemeSwitcher";
-import { useTheme } from "../../providers/ThemeProvider/useTheme";
 import { UserInfo } from "../UserInfo";
+import { ThemeContext } from "../../providers/ThemeProvider/ThemeContext";
 
 type LayoutProps = {
   children?: React.ReactNode;
@@ -15,7 +15,7 @@ export const Layout: React.FC<LayoutProps> = ({
   children,
   title,
 }: LayoutProps) => {
-  const { theme } = useTheme();
+  const { theme } = useContext(ThemeContext);
 
   return (
     <div className={classNames(styles.layout, theme)}>
