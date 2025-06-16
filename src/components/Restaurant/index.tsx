@@ -3,21 +3,19 @@ import { Dish } from "../Dish";
 import { Review } from "../Review";
 import { ReviewForm } from "../ReviewForm";
 import styles from "./Restaurant.module.scss";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
-import { selectRestaurantById } from "../../entities/restaurant/restaurantSlice";
 import { type Restaurant as RestaurantType } from "../../types/restaurant";
 
 type RestaurantProps = {
-  restaurantId: RestaurantType["id"];
+  restaurant: RestaurantType;
+  canWriteReview: boolean;
+  canAddDish: boolean;
 };
 
-export const Restaurant: React.FC<RestaurantProps> = ({ restaurantId }) => {
-  const restaurant =
-    useSelector((state: RootState) =>
-      selectRestaurantById(state, restaurantId),
-    ) || {};
-
+export const Restaurant: React.FC<RestaurantProps> = ({
+  restaurant,
+  canWriteReview,
+  canAddDish,
+}) => {
   const { name, menu, reviews, id } = restaurant;
 
   if (!name) {
@@ -29,7 +27,9 @@ export const Restaurant: React.FC<RestaurantProps> = ({ restaurantId }) => {
       <h2>{name}</h2>
       <h3>Меню</h3>
       {menu.length ? (
-        menu.map((dish) => <Dish key={dish} dishId={dish} />)
+        menu.map((dish) => (
+          <Dish key={dish} dishId={dish} canAddDish={canAddDish} />
+        ))
       ) : (
         <div className={styles.empty}>Ресторан пока не добавил блюда</div>
       )}
@@ -39,7 +39,7 @@ export const Restaurant: React.FC<RestaurantProps> = ({ restaurantId }) => {
       ) : (
         <div className={styles.empty}>Отзывов пока нет</div>
       )}
-      <ReviewForm key={id} />
+      {canWriteReview && <ReviewForm key={id} />}
     </div>
   );
 };

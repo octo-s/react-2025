@@ -12,9 +12,10 @@ const MIN_DISH_COUNT = 0;
 
 type DishProps = {
   dishId: DishType["id"];
+  canAddDish: boolean;
 };
 
-export const Dish: React.FC<DishProps> = ({ dishId }) => {
+export const Dish: React.FC<DishProps> = ({ dishId, canAddDish }) => {
   const dish =
     useSelector((state: RootState) => selectDishById(state, dishId)) || {};
 
@@ -35,13 +36,15 @@ export const Dish: React.FC<DishProps> = ({ dishId }) => {
             <li key={ingredient}>{ingredient}</li>
           ))}
       </ul>
-      <CounterButtons
-        value={count}
-        onDecrement={onDecrement}
-        onIncrement={onIncrement}
-        minCount={MIN_DISH_COUNT}
-        maxCount={MAX_DISH_COUNT}
-      />
+      {canAddDish && (
+        <CounterButtons
+          value={count}
+          onDecrement={onDecrement}
+          onIncrement={onIncrement}
+          minCount={MIN_DISH_COUNT}
+          maxCount={MAX_DISH_COUNT}
+        />
+      )}
     </div>
   );
 };
