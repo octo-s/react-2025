@@ -3,15 +3,21 @@ import type { Dish as DishType } from "../../types/restaurant";
 import { CounterButtons } from "../CounterButtons";
 import styles from "./Dish.module.scss";
 import { useCounter } from "../../hooks/useCounter";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
+import { selectDishById } from "../../entities/dish/dishSlice";
 
 const MAX_DISH_COUNT = 5;
 const MIN_DISH_COUNT = 0;
 
 type DishProps = {
-  dish: DishType;
+  dishId: DishType["id"];
 };
 
-export const Dish: React.FC<DishProps> = ({ dish }) => {
+export const Dish: React.FC<DishProps> = ({ dishId }) => {
+  const dish =
+    useSelector((state: RootState) => selectDishById(state, dishId)) || {};
+
   const { name, price, ingredients } = dish;
   const { count, onDecrement, onIncrement } = useCounter(
     MAX_DISH_COUNT,
@@ -25,7 +31,7 @@ export const Dish: React.FC<DishProps> = ({ dish }) => {
       </h4>
       <ul>
         {ingredients.length &&
-          ingredients.map((ingredient) => (
+          ingredients.map((ingredient: string) => (
             <li key={ingredient}>{ingredient}</li>
           ))}
       </ul>

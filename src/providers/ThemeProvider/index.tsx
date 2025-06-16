@@ -23,9 +23,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const themeProps = useMemo(() => ({ theme, setTheme, toggleTheme }), [theme]);
 
-  return (
-    <ThemeContext.Provider value={themeProps}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext value={themeProps}>{children}</ThemeContext>;
 };
 
 export default ThemeProvider;
