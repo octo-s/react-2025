@@ -32,7 +32,7 @@ export const Dish: React.FC<DishProps> = ({ dishId, canAddDish }) => {
       </h4>
       <ul>
         {ingredients.length &&
-          ingredients.map((ingredient: string) => (
+          ingredients.map((ingredient) => (
             <li key={ingredient}>{ingredient}</li>
           ))}
       </ul>

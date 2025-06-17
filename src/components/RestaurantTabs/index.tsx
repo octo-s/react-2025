@@ -9,9 +9,9 @@ import { type Restaurant } from "../../types/restaurant";
 export const RestaurantTabs: React.FC = () => {
   const restaurants = useSelector(selectRestaurantIds);
 
-  const [activeRestaurant, setActiveRestaurant] = useState<Restaurant["id"]>(
-    restaurants[0],
-  );
+  const [activeRestaurantId, setActiveRestaurantId] = useState<
+    Restaurant["id"]
+  >(restaurants[0]);
 
   return (
     <div className={styles.tabs}>
@@ -19,11 +19,11 @@ export const RestaurantTabs: React.FC = () => {
         <RestaurantTab
           key={restaurant}
           id={restaurant}
-          onClick={() => setActiveRestaurant(restaurant)}
-          isActive={restaurant === activeRestaurant}
+          onClick={() => setActiveRestaurantId(restaurant)}
+          isActive={restaurant === activeRestaurantId}
         />
       ))}
-      <RestaurantContainer restaurantId={activeRestaurant} />
+      <RestaurantContainer restaurantId={activeRestaurantId} />
     </div>
   );
 };
