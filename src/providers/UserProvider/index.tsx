@@ -16,9 +16,5 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setUser((prev) => (prev ? null : mockUser));
   };
 
-  return (
-    <UserContext.Provider value={{ user, toggleUser }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext value={{ user, toggleUser }}>{children}</UserContext>;
 };
