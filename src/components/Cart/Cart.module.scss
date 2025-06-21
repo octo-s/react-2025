@@ -1,0 +1,12 @@
+
+.cart {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(var(--color-accent-rgb), 0.3);
+  color: var(--text-primary);
+  padding: 2rem;
+  border-top: 2px solid var(--border-color);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  text-align: end;
+}

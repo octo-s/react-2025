@@ -27,3 +27,8 @@
   background-color: var(--color-primary-dark);
   color: var(--color-white);
 }
+
+.header,
+.footer {
+  flex: 0 0 auto;
+}

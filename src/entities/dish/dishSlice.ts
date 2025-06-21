@@ -20,9 +20,10 @@ const dishSlice = createSlice({
   reducers: {},
   selectors: {
     selectDishById: (state, id) => state.entities[id],
+    selectDishes: (state) => state.entities,
   },
 });
 
-export const { selectDishById } = dishSlice.selectors;
+export const { selectDishById, selectDishes } = dishSlice.selectors;
 
 export default dishSlice;

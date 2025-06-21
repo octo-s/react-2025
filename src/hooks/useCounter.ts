@@ -1,25 +1,38 @@
-import { useState } from "react";
+import {
+  addToCart,
+  removeFromCart,
+  selectItemQuantityById,
+} from "../entities/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
+import { useCallback } from "react";
 
-export const useCounter = (maxCount?: number, minCount?: number) => {
-  const [count, setCount] = useState<number>(0);
-
-  const onIncrement = () => {
-    if (maxCount && count === maxCount) {
+export const useCounter = (
+  id: string,
+  maxCount?: number,
+  minCount?: number,
+) => {
+  const quantity = useSelector((state: RootState) =>
+    selectItemQuantityById(state, id),
+  );
+  const dispatch = useDispatch();
+  const onIncrement = useCallback(() => {
+    if (maxCount && quantity === maxCount) {
       return;
     }
 
-    setCount(count + 1);
-  };
-  const onDecrement = () => {
-    if (maxCount && count === minCount) {
+    dispatch(addToCart(id));
+  }, [id, quantity, maxCount, dispatch]);
+  const onDecrement = useCallback(() => {
+    if (maxCount && quantity === minCount) {
       return;
     }
 
-    setCount(count - 1);
-  };
+    dispatch(removeFromCart(id));
+  }, [maxCount, quantity, minCount, dispatch, id]);
 
   return {
-    count,
+    quantity,
     onIncrement,
     onDecrement,
   };
