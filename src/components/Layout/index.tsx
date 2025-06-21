@@ -6,16 +6,16 @@ import classNames from "classnames";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { UserInfo } from "../UserInfo";
 import { ThemeContext } from "../../providers/ThemeProvider/ThemeContext";
+import { Cart } from "../Cart";
+import { UserContext } from "../../providers/UserProvider/UserContext";
+import { Outlet } from "react-router";
 
 type LayoutProps = {
-  children?: React.ReactNode;
   title: string;
 };
-export const Layout: React.FC<LayoutProps> = ({
-  children,
-  title,
-}: LayoutProps) => {
+export const Layout: React.FC<LayoutProps> = ({ title }: LayoutProps) => {
   const { theme } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
 
   return (
     <div className={classNames(styles.layout, theme)}>
@@ -27,7 +27,8 @@ export const Layout: React.FC<LayoutProps> = ({
           <ThemeSwitcher />
         </>
       </header>
-      {children}
+      <Outlet />
+      {user && <Cart />}
       <footer
         className={styles.footer}
       >{`© 2016—${new Date().getFullYear()} Potato Inc.`}</footer>

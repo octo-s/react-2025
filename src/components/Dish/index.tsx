@@ -3,30 +3,32 @@ import type { Dish as DishType } from "../../types/restaurant";
 import { CounterButtons } from "../CounterButtons";
 import styles from "./Dish.module.scss";
 import { useCounter } from "../../hooks/useCounter";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
-import { selectDishById } from "../../entities/dish/dishSlice";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../Button/Button";
 
 const MAX_DISH_COUNT = 5;
 const MIN_DISH_COUNT = 0;
 
 type DishProps = {
-  dishId: DishType["id"];
+  dish: DishType;
   canAddDish: boolean;
 };
 
-export const Dish: React.FC<DishProps> = ({ dishId, canAddDish }) => {
-  const dish =
-    useSelector((state: RootState) => selectDishById(state, dishId)) || {};
+export const Dish: React.FC<DishProps> = ({ dish, canAddDish }) => {
+  const navigate = useNavigate();
 
   const { name, price, ingredients } = dish;
-  const { count, onDecrement, onIncrement } = useCounter(
+  const { quantity, onDecrement, onIncrement } = useCounter(
+    dish.id,
     MAX_DISH_COUNT,
     MIN_DISH_COUNT,
   );
 
   return (
     <div className={styles.dish}>
+      <Button position="top" type="button" onClick={() => navigate(-1)}>
+        Вернуться
+      </Button>
       <h4>
         {name} - {price} eur
       </h4>
@@ -38,7 +40,7 @@ export const Dish: React.FC<DishProps> = ({ dishId, canAddDish }) => {
       </ul>
       {canAddDish && (
         <CounterButtons
-          value={count}
+          value={quantity}
           onDecrement={onDecrement}
           onIncrement={onIncrement}
           minCount={MIN_DISH_COUNT}
