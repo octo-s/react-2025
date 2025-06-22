@@ -3,7 +3,7 @@ import type { Dish as DishType } from "../../types/restaurant";
 import { CounterButtons } from "../CounterButtons";
 import styles from "./Dish.module.scss";
 import { useCounter } from "../../hooks/useCounter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Button } from "../Button/Button";
 
 const MAX_DISH_COUNT = 5;

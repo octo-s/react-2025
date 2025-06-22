@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
-import { type Restaurant as RestaurantType } from "../../types/restaurant";
 import { UserContext } from "../../providers/UserProvider/UserContext";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router";
 import { Reviews } from "../../components/Reviews";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
+import { selectRestaurantById } from "../../entities/restaurant/restaurantSlice";
 
 export const ReviewsPage: React.FC = () => {
   const { user } = useContext(UserContext);
-  const { restaurant } = useOutletContext<{ restaurant: RestaurantType }>();
+  const { restaurantId } = useParams();
+  const restaurant =
+    useSelector((state: RootState) =>
+      selectRestaurantById(state, restaurantId),
+    ) || {};
 
   if (!restaurant.name) {
     return null;

@@ -1,10 +1,16 @@
 import React from "react";
-import { type Restaurant as RestaurantType } from "../../types/restaurant";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router";
 import { Menu } from "../../components/Menu";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
+import { selectRestaurantById } from "../../entities/restaurant/restaurantSlice";
 
 export const MenuPage: React.FC = () => {
-  const { restaurant } = useOutletContext<{ restaurant: RestaurantType }>();
+  const { restaurantId } = useParams();
+  const restaurant =
+    useSelector((state: RootState) =>
+      selectRestaurantById(state, restaurantId),
+    ) || {};
 
   if (!restaurant.name) {
     return null;

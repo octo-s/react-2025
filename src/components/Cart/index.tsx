@@ -38,7 +38,7 @@ export const Cart: React.FC = () => {
   return (
     <div className={styles.cart}>
       <h3>Корзина</h3>
-      {!cartItems.length && <>Добавьте что-нибудь</>}
+      {!cartItems.length && "Добавьте что-нибудь"}
       {!!cartItems.length && (
         <ul>
           {cartItems.map((dishId) => (

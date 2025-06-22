@@ -4,7 +4,7 @@ import styles from "./RestaurantTab.module.scss";
 import { useSelector } from "react-redux";
 import { selectRestaurantById } from "../../entities/restaurant/restaurantSlice";
 import { type RootState } from "../../redux/store";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 type RestaurantTabProps = {
   id: string;
