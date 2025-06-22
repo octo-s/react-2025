@@ -1,0 +1,11 @@
+@use '../../styles/variables' as *;
+
+.navLink {
+  text-decoration: underline;
+  color: var(--color-text);
+  margin-right: 1rem;
+
+  &.active {
+    color: var(--color-accent);
+  }
+}
