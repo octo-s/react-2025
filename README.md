@@ -54,3 +54,22 @@ export default tseslint.config({
   },
 });
 ```
+
+на странице ресторана restaurants/:restaurantId грузить данные о ресторане (api /restaurant/:restaurantId)
+
+на странице меню ресторана restaurants/:restaurantId/menu грузить блюда ресторана (api /dishes?restaurantId=restaurantId)
+
+на странице отзывов ресторана 
+грузить отзывы ресторана (api /reviews?restaurantId=restaurantId) 
+и пользователей (api /users. Добавить проверку на пользователей, если они есть в сторе, то не грузить)
+
+на странице блюда dish/:dishId грузить данные о блюде (api /dish/:dishId). 
+Добавить проверку на наличие данных и если в сторе уже есть данные, то не грузить их
+
+использовать createEntityAdapter
+В компонентах необходимо отображать состояния загрузки и ошибки. Для статусов запроса сделать константы
+
+
+
+
+api /users

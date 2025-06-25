@@ -19,7 +19,6 @@ export const ReviewForm: React.FC = () => {
     <form className={styles.form}>
       <div className={styles.row}>
         <div className={styles.field}>
-          {" "}
           <label htmlFor="name">Ваше имя</label>
           <input
             value={name}

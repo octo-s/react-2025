@@ -1,22 +1,18 @@
-import type { Review as ReviewType } from "../../types/restaurant";
+import type { TReview } from "../../types/restaurant";
 import React from "react";
 import styles from "./Review.module.scss";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-import { selectReviewById } from "../../entities/review/reviewSlice";
-import { selectUserById } from "../../entities/user/userSlice";
+import { selectUserById } from "../../redux/entities/user/userSlice";
 
 type ReviewProps = {
-  reviewId: ReviewType["id"];
+  review: TReview;
 };
 
-export const Review: React.FC<ReviewProps> = ({ reviewId }) => {
-  const review =
-    useSelector((state: RootState) => selectReviewById(state, reviewId)) || {};
-
+export const Review: React.FC<ReviewProps> = ({ review }) => {
   const { userId, rating, text } = review;
-  const user =
-    useSelector((state: RootState) => selectUserById(state, userId)) || {};
+
+  const user = useSelector((state: RootState) => selectUserById(state, userId));
 
   return (
     <div className={styles.review}>

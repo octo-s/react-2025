@@ -9,7 +9,8 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix src",
     "preview": "vite preview",
-    "prettier:fix": "prettier --write ."
+    "prettier:fix": "prettier --write .",
+    "start-server": "supervisor simple_api/server.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",

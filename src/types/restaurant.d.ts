@@ -1,18 +1,18 @@
-export type Restaurant = {
+export type TRestaurant = {
   id: string;
   name: string;
   menu: string[];
   reviews: string[];
 };
 
-export type Dish = {
+export type TDish = {
   id: string;
   name: string;
   price: number;
   ingredients: string[];
 };
 
-export type Review = {
+export type TReview = {
   id: string;
   userId: string;
   text: string;

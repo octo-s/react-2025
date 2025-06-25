@@ -1,11 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router";
 import styles from "./Restaurant.module.scss";
-import type { Restaurant as RestaurantType } from "../../types/restaurant";
+import type { TRestaurant } from "../../types/restaurant";
 import { RestaurantNavLink } from "../RestaurantNavLink";
 
 type RestaurantProps = {
-  restaurant: RestaurantType;
+  restaurant: TRestaurant;
 };
 
 export const Restaurant: React.FC<RestaurantProps> = ({ restaurant }) => {
@@ -16,7 +16,6 @@ export const Restaurant: React.FC<RestaurantProps> = ({ restaurant }) => {
         <RestaurantNavLink text="Меню" to={"menu"} />
         <RestaurantNavLink text="Отзывы" to={"reviews"} />
       </div>
-
       <Outlet />
     </div>
   );
