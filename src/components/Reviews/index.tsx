@@ -1,18 +1,21 @@
 import React from "react";
-import { type TReview } from "../../types/restaurant";
+import { type TRestaurant } from "../../types/restaurant";
 import { ReviewForm } from "../ReviewForm";
 import { Review } from "../Review";
 import sharedStyles from "../../styles/shared.module.scss";
 
 type ReviewsProps = {
-  reviews: TReview[];
+  reviewIds: TRestaurant["reviews"];
   canAddReview: boolean;
 };
-export const Reviews: React.FC<ReviewsProps> = ({ reviews, canAddReview }) => {
+export const Reviews: React.FC<ReviewsProps> = ({
+  reviewIds,
+  canAddReview,
+}) => {
   return (
     <>
-      {reviews.length ? (
-        reviews.map((review) => <Review key={review.id} review={review} />)
+      {reviewIds.length ? (
+        reviewIds.map((id) => <Review key={id} reviewId={id} />)
       ) : (
         <div className={sharedStyles.empty}>Отзывов пока нет</div>
       )}

@@ -1,13 +1,8 @@
-import {
-  createEntityAdapter,
-  createSlice,
-  createSelector,
-} from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { type TReview } from "../../../types/restaurant";
 import { REQUEST_STATUSES, type RequestStatus } from "../../../types/request";
-import { getReviewsByRestaurantId } from "./get-reviews";
 import type { RootState } from "../../store";
-import { EMPTY_ARRAY } from "../../../constants";
+import { getReviewsByRestaurantId } from "./get-reviews";
 
 const reviewAdapter = createEntityAdapter<TReview>();
 
@@ -29,31 +24,16 @@ const reviewSlice = createSlice({
   extraReducers: (builder) =>
     builder.addCase(
       getReviewsByRestaurantId.fulfilled,
-      (state, { payload, meta }) => {
-        reviewAdapter.upsertMany(state, payload);
-
-        const reviewIds = payload.map((review) => review.id);
-        const restaurantId = meta.arg;
-
-        state.reviewIdsByRestaurant[restaurantId] = reviewIds;
+      (state, { payload }) => {
+        reviewAdapter.setAll(state, payload);
       },
     ),
 });
 
 export const {
-  selectById: selectReviewById,
   selectEntities: selectReviewEntities,
+  selectIds: selectReviewIds,
+  selectById: selectReviewById,
 } = reviewAdapter.getSelectors<RootState>((state) => state[reviewSlice.name]);
-
-export const selectReviewsByRestaurantId = (restaurantId: string) =>
-  createSelector(
-    [
-      (state: RootState) =>
-        state.review.reviewIdsByRestaurant[restaurantId] || EMPTY_ARRAY,
-      selectReviewEntities,
-    ],
-    (reviewIds, entities) =>
-      reviewIds.map((id) => entities[id]).filter(Boolean),
-  );
 
 export default reviewSlice;

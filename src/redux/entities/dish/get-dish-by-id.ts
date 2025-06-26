@@ -20,8 +20,6 @@ export const getDishById = createAsyncThunk<TDish, string, ThunkApiConfig>(
   {
     condition: (dishId, { getState }) => {
       const state = getState();
-      console.log(selectDishById(state, dishId), "selectDishById");
-
       return selectDishById(state, dishId) === undefined;
     },
   },

@@ -1,14 +1,9 @@
-import {
-  createEntityAdapter,
-  createSlice,
-  createSelector,
-} from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { type TDish } from "../../../types/restaurant";
 import { REQUEST_STATUSES, type RequestStatus } from "../../../types/request";
 import { getDishesByRestaurantId } from "./get-dishes";
-import { getDishById } from "./get-dish-by-id";
 import type { RootState } from "../../store";
-import { EMPTY_ARRAY } from "../../../constants";
+import { getDishById } from "./get-dish-by-id";
 
 type DishState = {
   requestStatus: RequestStatus;
@@ -26,17 +21,9 @@ const dishSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(
-        getDishesByRestaurantId.fulfilled,
-        (state, { payload, meta }) => {
-          dishAdapter.upsertMany(state, payload);
-
-          const dishIds = payload.map((dish) => dish.id);
-          const restaurantId = meta.arg;
-
-          state.dishIdsByRestaurant[restaurantId] = dishIds;
-        },
-      )
+      .addCase(getDishesByRestaurantId.fulfilled, (state, { payload }) => {
+        dishAdapter.setAll(state, payload);
+      })
       .addCase(getDishById.fulfilled, (state, { payload }) => {
         dishAdapter.upsertOne(state, payload);
       }),
@@ -45,16 +32,7 @@ const dishSlice = createSlice({
 export const {
   selectById: selectDishById,
   selectEntities: selectDishEntities,
+  selectIds: selectDishIds,
 } = dishAdapter.getSelectors<RootState>((state) => state[dishSlice.name]);
-
-export const selectDishesByRestaurantId = (restaurantId: string) =>
-  createSelector(
-    [
-      (state: RootState) =>
-        state.dish.dishIdsByRestaurant[restaurantId] || EMPTY_ARRAY,
-      selectDishEntities,
-    ],
-    (dishIds, entities) => dishIds.map((id) => entities[id]).filter(Boolean),
-  );
 
 export default dishSlice;

@@ -21,11 +21,4 @@ export const getDishesByRestaurantId = createAsyncThunk<
       return rejectWithValue("Network error");
     }
   },
-  {
-    condition: (restaurantId, { getState }) => {
-      const state = getState();
-
-      return state.dish.dishIdsByRestaurant[restaurantId] === undefined;
-    },
-  },
 );
