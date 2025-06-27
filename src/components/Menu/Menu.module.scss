@@ -1,21 +1,7 @@
-@use '../../styles/variables' as *;
-
 .menuList {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 0;
   margin: 0;
-}
-
-.menuItem {
-  color: var(--color-accent);
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: 16px;
-  transition: color 0.2s;
-
-  &:hover {
-    color: var(--color-accent-hover);
-  }
 }
