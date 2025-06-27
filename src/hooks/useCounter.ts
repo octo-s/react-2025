@@ -1,11 +1,11 @@
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
+import { useCallback } from "react";
 import {
   addToCart,
   removeFromCart,
   selectItemQuantityById,
-} from "../entities/cart/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../redux/store";
-import { useCallback } from "react";
+} from "../redux/entities/cart/cartSlice";
 
 export const useCounter = (
   id: string,

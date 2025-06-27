@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectDishById } from "../../entities/dish/dishSlice";
+import { selectDishById } from "../../redux/entities/dish/dishSlice";
 import styles from "./Cart.module.scss";
-import { selectCartItems } from "../../entities/cart/cartSlice";
+import { selectCartItems } from "../../redux/entities/cart/cartSlice";
 import type { RootState } from "../../redux/store";
 import { useCounter } from "../../hooks/useCounter";
 import { CounterButtons } from "../CounterButtons";

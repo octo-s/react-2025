@@ -1,5 +1,5 @@
 import React from "react";
-import type { Dish as DishType } from "../../types/restaurant";
+import type { TDish as DishType } from "../../types/restaurant";
 import { CounterButtons } from "../CounterButtons";
 import styles from "./Dish.module.scss";
 import { useCounter } from "../../hooks/useCounter";

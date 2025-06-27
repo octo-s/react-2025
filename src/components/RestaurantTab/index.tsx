@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import styles from "./RestaurantTab.module.scss";
 import { useSelector } from "react-redux";
-import { selectRestaurantById } from "../../entities/restaurant/restaurantSlice";
+import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice";
 import { type RootState } from "../../redux/store";
 import { NavLink } from "react-router";
 

@@ -3,7 +3,7 @@ import {
   type PayloadAction,
   createSelector,
 } from "@reduxjs/toolkit";
-import type { RootState } from "../../redux/store";
+import type { RootState } from "../../store";
 
 type CartState = {
   [dishId: string]: number;
