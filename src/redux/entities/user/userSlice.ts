@@ -1,10 +1,10 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { type User } from "../../../types/user";
+import { type TUser } from "../../../types/user";
 import { REQUEST_STATUSES, type RequestStatus } from "../../../types/request";
 import { getUsers } from "./get-users";
 import type { RootState } from "../../store";
 
-const userAdapter = createEntityAdapter<User>();
+const userAdapter = createEntityAdapter<TUser>();
 
 const userSlice = createSlice({
   name: "user",

@@ -1,37 +1,58 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../../providers/UserProvider/UserContext";
 import { useParams } from "react-router";
 import { Reviews } from "../../components/Reviews";
-import { useSelector } from "react-redux";
-import { type RootState, useAppDispatch } from "../../redux/store";
-import { getReviewsByRestaurantId } from "../../redux/entities/review/get-reviews";
-import { useRequest } from "../../redux/hooks/use-request";
-import type { TReview } from "../../types/restaurant";
 import { Loading } from "../../components/Loading";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { getUsers } from "../../redux/entities/user/get-users";
-import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice";
+import {
+  useAddReviewMutation,
+  useChangeReviewMutation,
+  useGetRestaurantByIdQuery,
+  useGetReviewsByRestaurantIdQuery,
+  useGetUsersQuery,
+} from "../../redux/api";
+import { type TReview } from "../../types/restaurant";
 
 export const ReviewsPage: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { user } = useContext(UserContext);
   const params = useParams<{ restaurantId: string }>();
   const restaurantId = params.restaurantId!;
 
-  const restaurant = useSelector((state: RootState) =>
-    selectRestaurantById(state, restaurantId),
-  );
+  const { data: restaurant } = useGetRestaurantByIdQuery(restaurantId);
+  const { isFetching: isUsersLoading } = useGetUsersQuery();
 
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+  const {
+    data: reviews,
+    isFetching: isReviewsLoading,
+    isError,
+  } = useGetReviewsByRestaurantIdQuery(restaurantId);
 
-  const { isLoading, isError } = useRequest<TReview[]>(
-    getReviewsByRestaurantId,
-    restaurantId as string,
-  );
+  const hasData = reviews?.length && restaurant;
+  const userReview = reviews?.find((review) => review.userId === user?.id);
 
-  if (isLoading) {
+  const [addReviewMutation, { isLoading: isNewReviewLoading }] =
+    useAddReviewMutation();
+  const [changeReviewMutation, { isLoading: isChangeReviewLoading }] =
+    useChangeReviewMutation();
+  const isLoading = userReview ? isChangeReviewLoading : isNewReviewLoading;
+
+  const handleAddReview = (review: Omit<TReview, "id" | "userId">) => {
+    if (userReview) {
+      changeReviewMutation({
+        reviewId: userReview.id,
+        review: { ...review, userId: user!.id },
+      });
+
+      return;
+    }
+
+    addReviewMutation({
+      restaurantId,
+      review: { ...review, userId: user!.id },
+    });
+  };
+
+  if (isReviewsLoading || isUsersLoading || !hasData) {
     return <Loading />;
   }
 
@@ -39,5 +60,12 @@ export const ReviewsPage: React.FC = () => {
     return <ErrorMessage message="Ошибка при загрузке отзывов" />;
   }
 
-  return <Reviews reviewIds={restaurant.reviews} canAddReview={!!user} />;
+  return (
+    <Reviews
+      reviews={reviews}
+      canAddReview={!!user}
+      addReview={handleAddReview}
+      isSubmitButtonDisabled={isLoading}
+    />
+  );
 };

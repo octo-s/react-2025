@@ -1,20 +1,15 @@
 import React from "react";
 import styles from "./RestaurantsPage.module.scss";
-import { useSelector } from "react-redux";
 import { Outlet } from "react-router";
 import { RestaurantTab } from "../../components/RestaurantTab";
-import { useEmptyRequest } from "../../redux/hooks/use-request";
-import { getRestaurants } from "../../redux/entities/restaurant/get-restaurants";
-import { selectRestaurantIds } from "../../redux/entities/restaurant/restaurantSlice";
 import { Loading } from "../../components/Loading";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { type TRestaurant } from "../../types/restaurant";
+import { useGetRestaurantsQuery } from "../../redux/api";
 
 export const RestaurantsPage: React.FC = () => {
-  const restaurants = useSelector(selectRestaurantIds);
-  const { isLoading, isError } = useEmptyRequest<TRestaurant[]>(getRestaurants);
+  const { data: restaurants, isFetching, isError } = useGetRestaurantsQuery();
 
-  if (isLoading) {
+  if (isFetching || !restaurants?.length) {
     return <Loading />;
   }
 
@@ -25,7 +20,7 @@ export const RestaurantsPage: React.FC = () => {
   return (
     <div className={styles.tabs}>
       {restaurants.map((restaurant) => (
-        <RestaurantTab key={restaurant} id={restaurant} />
+        <RestaurantTab key={restaurant.id} restaurant={restaurant} />
       ))}
       <Outlet />
     </div>

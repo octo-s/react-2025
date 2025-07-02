@@ -18,3 +18,13 @@ export type TReview = {
   text: string;
   rating: number;
 };
+
+export type TNewReviewData = {
+  restaurantId: string;
+  review: Omit<TReview, "id">;
+};
+
+export type TReviewData = {
+  reviewId: string;
+  review: Omit<TReview, "id">;
+};

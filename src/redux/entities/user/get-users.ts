@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { type User } from "../../../types/user";
+import { type TUser } from "../../../types/user";
 import { selectUserIds } from "./userSlice";
 import type { ThunkApiConfig } from "../../../types/request";
 
-export const getUsers = createAsyncThunk<User[], void, ThunkApiConfig>(
+export const getUsers = createAsyncThunk<TUser[], void, ThunkApiConfig>(
   "users/getAll",
   async (_, { rejectWithValue }) => {
     try {

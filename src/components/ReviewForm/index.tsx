@@ -8,27 +8,24 @@ import {
 import { CounterButtons } from "../CounterButtons";
 import styles from "./ReviewForm.module.scss";
 import { Button } from "../Button/Button";
+import { type TReview } from "../../types/restaurant";
 
-export const ReviewForm: React.FC = () => {
-  const { form, onNameChange, onTextChange, onRatingUp, onRatingDown, clear } =
-    useForm();
+type TReviewFormProps = {
+  onSubmitForm: (_review: Omit<TReview, "id" | "userId">) => void;
+  isSubmitButtonDisabled: boolean;
+};
 
-  const { name, text, rating } = form;
+export const ReviewForm: React.FC<TReviewFormProps> = ({
+  onSubmitForm,
+  isSubmitButtonDisabled,
+}) => {
+  const { form, onTextChange, onRatingUp, onRatingDown, clear } = useForm();
+
+  const { text, rating } = form;
 
   return (
     <form className={styles.form}>
       <div className={styles.row}>
-        <div className={styles.field}>
-          <label htmlFor="name">Ваше имя</label>
-          <input
-            value={name}
-            id="name"
-            onChange={(event) => {
-              onNameChange(event.target.value);
-            }}
-            className={styles.input}
-          />
-        </div>
         <div className={styles.field}>
           <label>
             Оцените от {MIN_RATING_VALUE} до {MAX_RATING_VALUE}
@@ -57,6 +54,13 @@ export const ReviewForm: React.FC = () => {
       </div>
       <Button position="bottom" type="button" onClick={clear}>
         Очистить форму
+      </Button>
+      <Button
+        title="Submit"
+        onClick={() => onSubmitForm(form)}
+        disabled={isSubmitButtonDisabled}
+      >
+        Отправить отзыв
       </Button>
     </form>
   );
