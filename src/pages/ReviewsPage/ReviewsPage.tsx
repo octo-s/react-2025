@@ -66,6 +66,7 @@ export const ReviewsPage: React.FC = () => {
       canAddReview={!!user}
       addReview={handleAddReview}
       isSubmitButtonDisabled={isLoading}
+      userReview={userReview}
     />
   );
 };

@@ -1,11 +1,10 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .form {
   background-color: var(--color-light);
   padding: 1.5rem;
   border-radius: $radius;
   margin-top: 1rem;
-
 
   .row {
     display: flex;
@@ -15,7 +14,6 @@
       flex: 1;
     }
   }
-
 
   .field {
     display: flex;

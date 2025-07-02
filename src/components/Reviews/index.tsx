@@ -8,6 +8,7 @@ type ReviewsProps = {
   reviews: TReview[];
   canAddReview: boolean;
   addReview: (_review: Omit<TReview, "id" | "userId">) => void;
+  userReview?: TReview;
   isSubmitButtonDisabled: boolean;
 };
 export const Reviews: React.FC<ReviewsProps> = ({
@@ -15,6 +16,7 @@ export const Reviews: React.FC<ReviewsProps> = ({
   canAddReview,
   addReview,
   isSubmitButtonDisabled,
+  userReview,
 }) => {
   return (
     <>
@@ -27,6 +29,7 @@ export const Reviews: React.FC<ReviewsProps> = ({
         <ReviewForm
           onSubmitForm={addReview}
           isSubmitButtonDisabled={isSubmitButtonDisabled}
+          userReview={userReview}
         />
       )}
     </>

@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  INITIAL_FORM,
   MAX_RATING_VALUE,
   MAX_REVIEW_LENGTH,
   MIN_RATING_VALUE,
@@ -13,13 +14,20 @@ import { type TReview } from "../../types/restaurant";
 type TReviewFormProps = {
   onSubmitForm: (_review: Omit<TReview, "id" | "userId">) => void;
   isSubmitButtonDisabled: boolean;
+  userReview?: TReview;
 };
 
 export const ReviewForm: React.FC<TReviewFormProps> = ({
   onSubmitForm,
   isSubmitButtonDisabled,
+  userReview = INITIAL_FORM,
 }) => {
-  const { form, onTextChange, onRatingUp, onRatingDown, clear } = useForm();
+  const initialValues = {
+    text: userReview.text,
+    rating: userReview.rating,
+  };
+  const { form, onTextChange, onRatingUp, onRatingDown, clear } =
+    useForm(initialValues);
 
   const { text, rating } = form;
 

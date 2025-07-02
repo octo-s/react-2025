@@ -20,7 +20,7 @@ export const MAX_RATING_VALUE = 5;
 export const MIN_RATING_VALUE = 1;
 export const MAX_REVIEW_LENGTH = 1000;
 
-const INITIAL_FORM: FormState = {
+export const INITIAL_FORM: FormState = {
   text: "",
   rating: MAX_RATING_VALUE,
 };
@@ -48,8 +48,8 @@ const reducer = (state: FormState, action: FormAction): FormState => {
   }
 };
 
-export const useForm = () => {
-  const [form, dispatch] = useReducer(reducer, INITIAL_FORM);
+export const useForm = (initialValues: FormState) => {
+  const [form, dispatch] = useReducer(reducer, initialValues);
 
   const onTextChange = (text: FormState["text"]) => {
     if (text.length <= MAX_REVIEW_LENGTH) {
