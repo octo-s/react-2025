@@ -1,29 +1,25 @@
 import React from "react";
 import { useParams } from "react-router";
 import { Menu } from "../../components/Menu";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
-import { getDishesByRestaurantId } from "../../redux/entities/dish/get-dishes";
-import { useRequest } from "../../redux/hooks/use-request";
-import type { TDish } from "../../types/restaurant";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { Loading } from "../../components/Loading";
-import { selectRestaurantById } from "../../redux/entities/restaurant/restaurantSlice";
+import {
+  useGetDishesByRestaurantIdQuery,
+  useGetUsersQuery,
+} from "../../redux/api";
 
 export const MenuPage: React.FC = () => {
   const params = useParams<{ restaurantId: string }>();
   const restaurantId = params.restaurantId!;
+  const { isFetching: isUsersLoading } = useGetUsersQuery();
 
-  const restaurant = useSelector((state: RootState) =>
-    selectRestaurantById(state, restaurantId),
-  );
+  const {
+    data: menu,
+    isFetching: isLoading,
+    isError,
+  } = useGetDishesByRestaurantIdQuery(restaurantId);
 
-  const { isLoading, isError } = useRequest<TDish[]>(
-    getDishesByRestaurantId,
-    restaurantId as string,
-  );
-
-  if (isLoading) {
+  if (isLoading || !menu?.length || isUsersLoading) {
     return <Loading />;
   }
 
@@ -31,5 +27,5 @@ export const MenuPage: React.FC = () => {
     return <ErrorMessage message="Ошибка при загрузке меню" />;
   }
 
-  return <Menu menu={restaurant.menu} />;
+  return <Menu menu={menu} />;
 };

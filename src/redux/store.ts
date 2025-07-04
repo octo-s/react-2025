@@ -6,6 +6,7 @@ import userSlice from "./entities/user/userSlice";
 import cartSlice from "./entities/cart/cartSlice";
 import requestSlice from "./entities/request/requestSlice";
 import { useDispatch } from "react-redux";
+import { api } from "./api";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,10 @@ export const store = configureStore({
     [userSlice.name]: userSlice.reducer,
     [cartSlice.name]: cartSlice.reducer,
     [requestSlice.name]: requestSlice.reducer,
+    [api.reducerPath]: api.reducer,
   },
+  middleware: (getDefaultMiddlewares) =>
+    getDefaultMiddlewares().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

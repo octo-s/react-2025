@@ -1,18 +1,18 @@
 import React from "react";
-import { type TRestaurant } from "../../types/restaurant";
+import type { TDish } from "../../types/restaurant";
 import sharedStyles from "../../styles/shared.module.scss";
 import styles from "./Menu.module.scss";
 import { MenuItemLink } from "../MenuItemLink";
 
 type MenuProps = {
-  menu: TRestaurant["menu"];
+  menu: TDish[];
 };
 
 export const Menu: React.FC<MenuProps> = ({ menu }) => {
   return menu.length ? (
     <div className={styles.menuList}>
-      {menu.map((id) => (
-        <MenuItemLink key={id} id={id} />
+      {menu.map((dish) => (
+        <MenuItemLink key={dish.id} dish={dish} />
       ))}
     </div>
   ) : (

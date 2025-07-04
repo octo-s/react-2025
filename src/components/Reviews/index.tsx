@@ -1,25 +1,37 @@
 import React from "react";
-import { type TRestaurant } from "../../types/restaurant";
+import type { TReview } from "../../types/restaurant";
 import { ReviewForm } from "../ReviewForm";
 import { Review } from "../Review";
 import sharedStyles from "../../styles/shared.module.scss";
 
 type ReviewsProps = {
-  reviewIds: TRestaurant["reviews"];
+  reviews: TReview[];
   canAddReview: boolean;
+  addReview: (_review: Omit<TReview, "id" | "userId">) => void;
+  userReview?: TReview;
+  isSubmitButtonDisabled: boolean;
 };
 export const Reviews: React.FC<ReviewsProps> = ({
-  reviewIds,
+  reviews,
   canAddReview,
+  addReview,
+  isSubmitButtonDisabled,
+  userReview,
 }) => {
   return (
     <>
-      {reviewIds.length ? (
-        reviewIds.map((id) => <Review key={id} reviewId={id} />)
+      {reviews.length ? (
+        reviews.map((review) => <Review key={review.id} review={review} />)
       ) : (
         <div className={sharedStyles.empty}>Отзывов пока нет</div>
       )}
-      {canAddReview && <ReviewForm />}
+      {canAddReview && (
+        <ReviewForm
+          onSubmitForm={addReview}
+          isSubmitButtonDisabled={isSubmitButtonDisabled}
+          userReview={userReview}
+        />
+      )}
     </>
   );
 };
