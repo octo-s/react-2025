@@ -7,7 +7,6 @@ import { ErrorMessage } from "../../components/ErrorMessage";
 import {
   useAddReviewMutation,
   useChangeReviewMutation,
-  useGetRestaurantByIdQuery,
   useGetReviewsByRestaurantIdQuery,
   useGetUsersQuery,
 } from "../../redux/api";
@@ -18,7 +17,6 @@ export const ReviewsPage: React.FC = () => {
   const params = useParams<{ restaurantId: string }>();
   const restaurantId = params.restaurantId!;
 
-  const { data: restaurant } = useGetRestaurantByIdQuery(restaurantId);
   const { isFetching: isUsersLoading } = useGetUsersQuery();
 
   const {
@@ -27,7 +25,7 @@ export const ReviewsPage: React.FC = () => {
     isError,
   } = useGetReviewsByRestaurantIdQuery(restaurantId);
 
-  const hasData = reviews?.length && restaurant;
+  const hasData = reviews?.length;
   const userReview = reviews?.find((review) => review.userId === user?.id);
 
   const [addReviewMutation, { isLoading: isNewReviewLoading }] =
